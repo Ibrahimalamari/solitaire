@@ -21,15 +21,15 @@
    
     </div>
   <!-- Name Input Form -->
-<form class="name-form" action="#" method="post">
+<form class="name-form" action="../back-end/addscores.php" method="post">
   <h2 >Enter your name:</h2>
-  <input type="text" id="username" name="username" placeholder="Your Name" required>
+  <input type="text" id="username" name="username"  pattern="[A-Za-z\s]+" placeholder="Your Name" required>
   <button type="submit">Submit</button>
 </form>
 
   </div>
   <br><br><br><br>
-  <footer class="footer">
+  <footer class="footer" id="footer">
   <p>Relax, focus, and enjoy your Solitaire game!</p>
   
   <p>  <a href="solitaire.html">Home</a> | <a href="#footer">Contact</a>  </p>

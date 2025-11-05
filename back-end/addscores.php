@@ -1,16 +1,13 @@
 <?php
 include('config.php');
 
+// Get username from POST
+$username = $mysql->real_escape_string($_POST['username'] ?? '');
+$score = rand(0, 10);      
+$duration = rand(0, 40);   
 
-$username =$_POST['username'] ?? '';
-$score =$_POST['score'] ?? 0;
-$duration =$_POST['duration'] ?? 0; // duration in seconds or minutes
-
-
-$sql ="INSERT INTO scores (username, score, duration) VALUES (?, ?, ?)";
-$query =$mysql->prepare($sql);
+$sql = "INSERT INTO scores (name, score, duration) VALUES ('$username', $score, $duration)";
+$query=$mysql->prepare($sql);
 $query->execute();
-
-    
-
+header("Location: ../front-end/solitaire.html");
 ?>
