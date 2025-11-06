@@ -1,27 +1,61 @@
-let tableBody = document.querySelector(".tb tbody"); // target tbody
 
-axios.get("../back-end/getscores.php")
-  .then(response => {
-    const scores = response.data;
+const BASE_URL = "http://localhost/Fse-solitaire/back-end/apis/";
+document.addEventListener("DOMContentLoaded", () => {
+    getScores();
+});
 
-    tableBody.innerHTML = ""; // clear old rows
+
+async function getScores() {
+    try {
+        const response = await axios.get(BASE_URL + "get_scores.php");
+        if (response.data.success) {
+            displayScores(response.data.data);
+        } else {
+            console.error("Error fetching scores:", response.data.error);
+        }
+    } catch (error) {
+        console.error("Error fetching scores:", error);
+    }
+}
+
+
+function displayScores(scores) {
+    const tbody = document.querySelector(".tb tbody");
+    tbody.innerHTML = ""; 
 
     scores.forEach(score => {
-      let tr = document.createElement("tr");
+        const tr = document.createElement("tr");
+        const name = document.createElement("td");
+        name.textContent = score.name;
+        const playerscore = document.createElement("td");
+        playerscore.textContent = score.score;
+        const duration = document.createElement("td");
+        duration.textContent = score.duration;
 
-      let tdUsername = document.createElement("td");
-      tdUsername.textContent = score.name;
-      tr.appendChild(tdUsername);
-
-      let tdScore = document.createElement("td");
-      tdScore.textContent = score.score;
-      tr.appendChild(tdScore);
-
-      let tdDuration = document.createElement("td");
-      tdDuration.textContent = score.duration;
-      tr.appendChild(tdDuration);
-
-      tableBody.appendChild(tr); // append to tbody, not table
+        tr.appendChild(name);
+        tr.appendChild(playerscore);
+        tr.appendChild(duration);
+        tbody.appendChild(tr);
     });
-  })
-  .catch(error => console.error("Error fetching scores:", error));
+}
+
+async function addScores(value_name){
+    try {
+        const url = BASE_URL + "add_scores.php";
+        const response = await axios.post(url, { name: value_name });
+
+        if(response.data.success){
+          alert("Player added successfully!");
+            getScores(); 
+        } else {
+            console.log(response.data.error);
+        }
+    } catch (error) {
+        console.log("Error adding score:", error);
+    }
+}
+document.querySelector(".sbmit").addEventListener("click",function(){
+    const playerName =document.getElementById("playerName").value.trim();
+
+    addScores(playerName);
+});
