@@ -7,7 +7,6 @@ if(isset($data["name"]) && $data["name"] != ""){
     $name = $data["name"];
 } else {
     echo json_encode(["success" => false, "error" => "NameMissing"]);
-    exit();
 }
 
 $score = rand(1, 10);

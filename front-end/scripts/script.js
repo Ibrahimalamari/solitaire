@@ -1,10 +1,9 @@
 
 const BASE_URL = "http://localhost/Fse-solitaire/back-end/apis/";
+
 document.addEventListener("DOMContentLoaded", () => {
-    getScores();
-});
-
-
+    const tbody = document.querySelector(".tb tbody");
+    const submitBtn = document.querySelector(".submitBtn");
 async function getScores() {
     try {
         const response = await axios.get(BASE_URL + "get_scores.php");
@@ -20,9 +19,8 @@ async function getScores() {
 
 
 function displayScores(scores) {
-    const tbody = document.querySelector(".tb tbody");
+   
     tbody.innerHTML = ""; 
-
     scores.forEach(score => {
         const tr = document.createElement("tr");
         const name = document.createElement("td");
@@ -39,6 +37,7 @@ function displayScores(scores) {
     });
 }
 
+
 async function addScores(value_name){
     try {
         const url = BASE_URL + "add_scores.php";
@@ -47,6 +46,7 @@ async function addScores(value_name){
         if(response.data.success){
           alert("Player added successfully!");
             getScores(); 
+             window.location.href = "solitaire.html";
         } else {
             console.log(response.data.error);
         }
@@ -54,8 +54,13 @@ async function addScores(value_name){
         console.log("Error adding score:", error);
     }
 }
-document.querySelector(".sbmit").addEventListener("click",function(){
-    const playerName =document.getElementById("playerName").value.trim();
-
-    addScores(playerName);
+    
+      if (submitBtn) {
+        submitBtn.addEventListener("click", () => {
+            const playerName = document.getElementById("playerName").value.trim();
+            addScores(playerName);
+        });
+    } 
+    getScores(); 
 });
+
