@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2025 at 11:53 PM
+-- Generation Time: Nov 07, 2025 at 07:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,12 @@ INSERT INTO `scores` (`id`, `name`, `score`, `duration`) VALUES
 (5, 'Naya', 8, 7),
 (6, 'Fadi', 6, 5),
 (7, 'Omar', 8, 33),
-(8, 'Alia', 5, 19);
+(8, 'Alia', 5, 19),
+(9, 'Hassan', 10, 30),
+(10, 'Zeina', 2, 8),
+(11, 'Mahmoud', 6, 8),
+(12, 'Mohammad', 9, 6),
+(13, 'Omar', 4, 3);
 
 --
 -- Indexes for dumped tables
@@ -66,7 +71,7 @@ ALTER TABLE `scores`
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
